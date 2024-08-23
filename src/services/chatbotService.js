@@ -209,24 +209,43 @@ let getUniversitySelectTemplate = () => {
 }
 
 let handleUserQuestion = async (sender_psid, user_message) => {
-    try {
-        if (received_message.text) {    
+    return new Promise(async (resolve, reject) => {
+        try{
+            let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút."}
             // Send user message to model and get model response
             let model_response = await sendToModel(user_message);
 
-            let response = { "text" : model_response};
+            let response2 = { "text" : model_response};
 
             // Send text message
-            await callSendAPI(sender_psid, response);
+            await callSendAPI(sender_psid, response2);
 
-        } else if (received_message.attachments) {
-            let response = { "text" : "Không thể xử lý tin nhắn với định dạng này."};
+            resolve("done");
+        }catch(e){
+            let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
+            await callSendAPI(sender_psid, response);
+            reject(e);
         }
-    } catch(e){
-        console.error("Error handling message:", e);
-        let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
-        await callSendAPI(sender_psid, response); 
-    }
+    })
+
+    // try {
+    //     if (received_message.text) {    
+    //         // Send user message to model and get model response
+    //         let model_response = await sendToModel(user_message);
+
+    //         let response = { "text" : model_response};
+
+    //         // Send text message
+    //         await callSendAPI(sender_psid, response);
+
+    //     } else if (received_message.attachments) {
+    //         let response = { "text" : "Không thể xử lý tin nhắn với định dạng này."};
+    //     }
+    // } catch(e){
+    //     console.error("Error handling message:", e);
+    //     let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
+    //     await callSendAPI(sender_psid, response); 
+    // }
 }
 
 let sendToModel = (user_message) => {
