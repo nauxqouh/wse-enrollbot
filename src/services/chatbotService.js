@@ -4,6 +4,12 @@ import request from "request";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 const IMAGE_GET_STARTED = 'https://static.vnuhcm.edu.vn/images/0%20Phong%204T/Logo/Verfinal/Logo%20VNU%20-%20Chuan.png';
+const HCMUS_IMAGE = 'https://cdn-media.sforum.vn/storage/app/media/hoc-phi-hcmus-thumbnail.jpg';
+const USSH_IMAGE = 'https://hcmussh.edu.vn/img/news/26286031.jpg?t=26286035';
+const UEL_IMAGE = 'https://img.giaoduc.net.vn/w700/Uploaded/2024/ihubnataungyr/2024_05_03/kt-luat-4254.png';
+const UIT_IMAGE = 'https://banqlcs.uit.edu.vn/sites/banqlcs/files/uploads/uit2.jpg';
+const IU_IMAGE = 'https://xdcs.cdnchinhphu.vn/thumb_w/640/446259493575335936/2023/8/22/dhqt-dhqghcm-1692699067416977588770.jpg';
+const HCMUT_IMAGE = 'https://lms.hcmut.edu.vn/pluginfile.php/3/theme_academi/slide2image/1723683411/slbktv.jpg';
 
 let callSendAPI = (sender_psid, response) => {
     // Construct the message body
@@ -55,11 +61,11 @@ let handleGetStarted = (sender_psid) => {
             let username = await getUserName(sender_psid);
             let response1 = { "text": `Chào mừng ${username} đến với wse enroll-bot - Hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM.`}
 
-            let response2 = sendGetStartedTemplate();
+            let response2 = getStartedTemplate();
 
             // send text message
             await callSendAPI(sender_psid, response1);
-            
+
             // send generic template message
             await callSendAPI(sender_psid, response2);
 
@@ -70,7 +76,7 @@ let handleGetStarted = (sender_psid) => {
     })
 }
 
-let sendGetStartedTemplate = () => {
+let getStartedTemplate = () => {
     let response = {
         "attachment": {
             "type": "template",
@@ -99,6 +105,109 @@ let sendGetStartedTemplate = () => {
     return response;
 }
 
+let handleSendUniversitySelect = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+
+            let response1 = getUniversitySelectTemplate();
+
+            // send text message
+            await callSendAPI(sender_psid, response1);
+
+            resolve("done");
+        }catch(e){
+            reject(e);
+        }
+    })
+}
+
+let getUniversitySelectTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "HCMUS",
+                        "subtitle": "Đại học Khoa học Tự nhiên",
+                        "image_url": HCMUS_IMAGE,
+                        "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Chọn",
+                            "payload": "HCMUS",
+                        }
+                        ]
+                    },
+                    {
+                        "title": "USSH",
+                        "subtitle": "Đại học Khoa học Xã hội & Nhân văn",
+                        "image_url": USSH_IMAGE,
+                        "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Chọn",
+                            "payload": "USSH",
+                        }
+                        ]
+                    },
+                    {
+                        "title": "UEL",
+                        "subtitle": "Đại học Kinh tế - Luật",
+                        "image_url": UEL_IMAGE,
+                        "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Chọn",
+                            "payload": "UEL",
+                        }
+                        ]
+                    },
+                    {
+                        "title": "UIT",
+                        "subtitle": "Đại học Công nghệ thông tin",
+                        "image_url": UIT_IMAGE,
+                        "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Chọn",
+                            "payload": "UIT",
+                        }
+                        ]
+                    },
+                    {
+                        "title": "IU",
+                        "subtitle": "Đại học Quốc tế",
+                        "image_url": IU_IMAGE,
+                        "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Chọn",
+                            "payload": "IU",
+                        }
+                        ]
+                    },
+                    {
+                        "title": "HCMUT",
+                        "subtitle": "Đại học Bách khoa",
+                        "image_url": HCMUT_IMAGE,
+                        "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Chọn",
+                            "payload": "HCMUT",
+                        }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    return response;
+}
+
 module.exports = {
-    handleGetStarted: handleGetStarted
+    handleGetStarted: handleGetStarted,
+    handleSendUniversitySelect: handleSendUniversitySelect
 }

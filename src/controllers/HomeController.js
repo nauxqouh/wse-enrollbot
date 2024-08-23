@@ -136,6 +136,11 @@ async function handlePostback(sender_psid, received_postback) {
         case 'GET_STARTED':
             await chatbotService.handleGetStarted(sender_psid);
             break;
+
+        case 'UNIVERSITY_SELECT':
+            await chatbotService.handleSendUniversitySelect(sender_psid);
+            break;
+            
         default:
             response = { "text": `Oop! Tôi không thể trả lời lệnh ${payload}`}
     }
