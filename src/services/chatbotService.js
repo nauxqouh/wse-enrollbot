@@ -59,7 +59,7 @@ let handleGetStarted = (sender_psid) => {
 
             let response2 = sendGetStartedTemplate();
             // send generic template message
-            await callSendAPI(sender_psid, response1);
+            await callSendAPI(sender_psid, response2);
 
             resolve("done");
         }catch(e){
@@ -69,25 +69,51 @@ let handleGetStarted = (sender_psid) => {
 }
 
 let sendGetStartedTemplate = () => {
+    // let response = {
+    //     "attachment": {
+    //         "type": "template",
+    //         "payload": {
+    //             "template_type": "generic",
+    //             "elements": [{
+    //                 "title": "Chọn hệ thống muốn tư vấn:",
+    //                 "subtitle": "Ấn vào nút bấm tương ứng với lựa chọn của bạn.",
+    //                 "image_url": IMAGE_GET_STARTED,
+    //                 "buttons": [
+    //                 {
+    //                     "type": "postback",
+    //                     "title": "TƯ VẤN THEO TRƯỜNG",
+    //                     "payload": "UNIVERSITY_SELECT",
+    //                 },
+    //                 {
+    //                     "type": "postback",
+    //                     "title": "TƯ VẤN CHUNG",
+    //                     "payload": "FAQ",
+    //                 }
+    //                 ],
+    //             }]
+    //         }
+    //     }
+    // }
+
     let response = {
         "attachment": {
             "type": "template",
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Chọn hệ thống muốn tư vấn:",
-                    "subtitle": "Ấn vào nút bấm tương ứng với lựa chọn của bạn.",
+                    "title": "Is this the right picture?",
+                    "subtitle": "Tap a button to answer.",
                     "image_url": IMAGE_GET_STARTED,
                     "buttons": [
                     {
                         "type": "postback",
-                        "title": "TƯ VẤN THEO TRƯỜNG",
-                        "payload": "UNIVERSITY_SELECT",
+                        "title": "Yes!",
+                        "payload": "yes",
                     },
                     {
                         "type": "postback",
-                        "title": "TƯ VẤN CHUNG",
-                        "payload": "FAQ",
+                        "title": "No!",
+                        "payload": "no",
                     }
                     ],
                 }]
