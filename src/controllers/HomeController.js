@@ -144,7 +144,7 @@ async function handlePostback(sender_psid, received_postback) {
             await chatbotService.handleSendUniversitySelect(sender_psid);
             break;
         
-        case 'Chọn':
+        case 'HCMUS':
             response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
             break;
         
