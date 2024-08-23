@@ -124,13 +124,20 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
   
     // Set the response based on the postback payload
-    if (payload === 'yes') {
-        response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
-    } else if (payload === "GET_STARTED") {
-        response = { "text": "Chào mừng bạn đến với wse enroll-bot - hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM."}
+    switch(payload) {
+        case "yes":
+            response = { "text": "Thanks!" }
+            break;
+        case "no":
+            response = { "text": "Oops, try sending another image." }
+            break;
+        case "GET_STARTED":
+            response = { "text": "Chào mừng bạn đến với wse enroll-bot - hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM."}
+            break;
+        default:
+            response = { "text": `Oop! Tôi không thể trả lời lệnh ${payload}`}
     }
+
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 }
