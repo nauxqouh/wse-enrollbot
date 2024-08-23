@@ -2,6 +2,7 @@ require('dotenv').config();
 import request from "request";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const API_MODEL = 'https://api.render.com/deploy/srv-cr4aqu0gph6c73bnivt0?key=A8lhzw-cuEI';
 
 const IMAGE_GET_STARTED = 'https://static.vnuhcm.edu.vn/images/0%20Phong%204T/Logo/Verfinal/Logo%20VNU%20-%20Chuan.png';
 const HCMUS_IMAGE = 'https://cdn-media.sforum.vn/storage/app/media/hoc-phi-hcmus-thumbnail.jpg';
@@ -207,7 +208,45 @@ let getUniversitySelectTemplate = () => {
     return response;
 }
 
+let handleUserQuestion = async (sender_psid, user_message) => {
+    try {
+        if (received_message.text) {    
+            // Send user message to model and get model response
+            let model_response = await sendToModel(user_message);
+
+            let response = { "text" : model_response};
+
+            // Send text message
+            await callSendAPI(sender_psid, response);
+
+        } else if (received_message.attachments) {
+            let response = { "text" : "Không thể xử lý tin nhắn với định dạng này."};
+        }
+    } catch(e){
+        console.error("Error handling message:", err);
+        let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
+        await callSendAPI(sender_psid, response); 
+    }
+}
+
+let sendToModel = (user_message) => {
+    return new Promise((resolve, reject) => {
+        request({
+            "uri": `https://api.render.com/deploy/srv-cr4aqu0gph6c73bnivt0?key=A8lhzw-cuEI`,
+            "method": "POST",
+            "json": { "message": user_message}
+        }, (err, res, body) => {
+            if (!err && res.statusCode == 200) {
+                resolve(body.response);  // Get model response
+            } else {
+                reject("Không thể kết nối đến model chatbot." + err);
+            }
+        });
+    })
+}
+
 module.exports = {
     handleGetStarted: handleGetStarted,
-    handleSendUniversitySelect: handleSendUniversitySelect
+    handleSendUniversitySelect: handleSendUniversitySelect,
+    handleUserQuestion: handleUserQuestion
 }
