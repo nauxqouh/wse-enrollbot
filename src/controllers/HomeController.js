@@ -126,13 +126,14 @@ async function handlePostback(sender_psid, received_postback) {
   
     // Set the response based on the postback payload
     switch(payload) {
-        case "yes":
+        case 'yes':
             response = { "text": "Thanks!" }
             break;
-        case "no":
+        case 'no':
             response = { "text": "Oops, try sending another image." }
             break;
-        case "GET_STARTED":
+        case 'RESTART_BOT':
+        case 'GET_STARTED':
             await chatbotService.handleGetStarted(sender_psid);
             break;
         default:
@@ -206,15 +207,15 @@ let setupPersistentMenu = async (req, res) => {
                     "composer_input_disabled": false,
                     "call_to_actions": [
                         {
-                            "type": "postback",
-                            "title": "Khởi động lại cuộc hội thoại.",
-                            "payload": "RESTART_BOT"
-                        },
-                        {
                             "type": "web_url",
                             "title": "Facebook Page WSE Enroll-bot",
                             "url": "https://www.facebook.com/profile.php?id=61564356523160",
                             "webview_height_ratio": "full"
+                        },
+                        {
+                            "type": "postback",
+                            "title": "Khởi động lại cuộc hội thoại",
+                            "payload": "RESTART_BOT"
                         }
                     ]
                 }
