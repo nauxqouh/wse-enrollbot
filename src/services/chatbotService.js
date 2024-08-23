@@ -139,7 +139,7 @@ let getUniversitySelectTemplate = () => {
                             "title": "Chọn",
                             "payload": "HCMUS",
                         }
-                        ]
+                        ],
                     },
                     {
                         "title": "USSH",
@@ -151,7 +151,7 @@ let getUniversitySelectTemplate = () => {
                             "title": "Chọn",
                             "payload": "USSH",
                         }
-                        ]
+                        ],
                     },
                     {
                         "title": "UEL",
@@ -163,7 +163,7 @@ let getUniversitySelectTemplate = () => {
                             "title": "Chọn",
                             "payload": "UEL",
                         }
-                        ]
+                        ],
                     },
                     {
                         "title": "UIT",
@@ -175,7 +175,7 @@ let getUniversitySelectTemplate = () => {
                             "title": "Chọn",
                             "payload": "UIT",
                         }
-                        ]
+                        ],
                     },
                     {
                         "title": "IU",
@@ -187,7 +187,7 @@ let getUniversitySelectTemplate = () => {
                             "title": "Chọn",
                             "payload": "IU",
                         }
-                        ]
+                        ],
                     },
                     {
                         "title": "HCMUT",
@@ -199,12 +199,12 @@ let getUniversitySelectTemplate = () => {
                             "title": "Chọn",
                             "payload": "HCMUT",
                         }
-                        ]
+                        ],
                     }
                 ]
             }
         }
-    }
+    };
     return response;
 }
 
