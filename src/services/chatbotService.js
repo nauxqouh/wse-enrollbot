@@ -27,7 +27,7 @@ let callSendAPI = (sender_psid, response) => {
     });
 }
 
-let handleGetStarted = () => {
+let handleGetStarted = (sender_psid) => {
     return Promise(async (resolve, reject) => {
         try{
             let response = { "text": "Chào mừng bạn đến với wse enroll-bot - hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM."}
