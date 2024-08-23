@@ -54,14 +54,12 @@ let handleGetStarted = (sender_psid) => {
         try{
             let username = await getUserName(sender_psid);
             let response1 = { "text": `Chào mừng ${username} đến với wse enroll-bot - Hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM.`}
-
-            let response2 = sendGetStartedTemplate();
-
             // send text message
             await callSendAPI(sender_psid, response1);
 
+            let response2 = sendGetStartedTemplate();
             // send generic template message
-            await callSendAPI(sender_psid, response2);
+            await callSendAPI(sender_psid, response1);
 
             resolve("done");
         }catch(e){
