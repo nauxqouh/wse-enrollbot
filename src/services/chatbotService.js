@@ -77,39 +77,19 @@ let sendGetStartedTemplate = () => {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Chọn trường đại học bạn muốn tư vấn:",
-                    "subtitle": "Dưới đây là các danh sách các trường trong hệ thống ĐHQG-HCM. Ấn vào nút bấm tương ứng với lựa chọn của bạn.",
+                    "title": "Chọn hệ thống muốn tư vấn:",
+                    "subtitle": "Ấn vào nút bấm tương ứng với lựa chọn của bạn.",
                     "image_url": IMAGE_GET_STARTED,
                     "buttons": [
                     {
                         "type": "postback",
-                        "title": "HCMUS - Đại học Khoa học Tự nhiên",
-                        "payload": "HCMUS",
+                        "title": "TƯ VẤN THEO TRƯỜNG",
+                        "payload": "UNIVERSITY_SELECT",
                     },
                     {
                         "type": "postback",
-                        "title": "IU - Đại học Quốc tế",
-                        "payload": "IU",
-                    },
-                    {
-                        "type": "postback",
-                        "title": "USSH - Đại học Khoa học Xã hội & Nhân văn",
-                        "payload": "USSH",
-                    },
-                    {
-                        "type": "postback",
-                        "title": "UIT - Đại học Công nghệ thông tin",
-                        "payload": "UIT",
-                    },
-                    {
-                        "type": "postback",
-                        "title": "UEL - Đại học Kinh tế - Luật",
-                        "payload": "UEL",
-                    },
-                    {
-                        "type": "postback",
-                        "title": "HCMUT - Đại học Bách Khoa",
-                        "payload": "HCMUT",
+                        "title": "TƯ VẤN CHUNG",
+                        "payload": "FAQ",
                     }
                     ],
                 }]

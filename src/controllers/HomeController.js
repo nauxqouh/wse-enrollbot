@@ -233,7 +233,7 @@ let setupPersistentMenu = async (req, res) => {
         if (!err) {
             console.log('Setup persistent menu succeeds!')
         } else {
-            console.error("Unable to setup user profile:" + err);
+            console.error("Unable to setup persistent menu:" + err);
         }
     });
 
