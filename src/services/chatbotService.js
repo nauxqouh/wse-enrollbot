@@ -223,7 +223,7 @@ let handleUserQuestion = async (sender_psid, user_message) => {
             let response = { "text" : "Không thể xử lý tin nhắn với định dạng này."};
         }
     } catch(e){
-        console.error("Error handling message:", err);
+        console.error("Error handling message:", e);
         let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
         await callSendAPI(sender_psid, response); 
     }
