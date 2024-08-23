@@ -29,6 +29,7 @@ let callSendAPI = (sender_psid, response) => {
         "json": request_body
     }, (err, res, body) => {
         if (!err) {
+            console.log("Sender_PSID nè: " + sender_psid);
             console.log('message sent!')
         } else {
             console.error("Unable to send message:" + err);
@@ -110,10 +111,8 @@ let handleSendUniversitySelect = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
 
-            let response1 = getUniversitySelectTemplate();
-
-            // send text message
-            await callSendAPI(sender_psid, response1);
+            let response = getUniversitySelectTemplate();
+            await callSendAPI(sender_psid, response);
 
             resolve("done");
         }catch(e){
@@ -212,6 +211,9 @@ let handleUserQuestion = async (sender_psid, user_message) => {
     return new Promise(async (resolve, reject) => {
         try{
             let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút."}
+            // Send text message
+            await callSendAPI(sender_psid, response1);
+
             // Send user message to model and get model response
             let model_response = await sendToModel(user_message);
 
