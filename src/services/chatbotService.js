@@ -3,7 +3,7 @@ import request from "request";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-const IMAGE_GET_STARTED = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fvnuhcm.edu.vn%2Ftin-tuc_32343364%2Fco-quan-dhqg-hcm-tuyen-dung-vien-chuc%2F363038323364.html&psig=AOvVaw2p945znT5m_2njg5ro9teU&ust=1724501641069000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPiOxK-Li4gDFQAAAAAdAAAAABAE';
+const IMAGE_GET_STARTED = 'https://static.vnuhcm.edu.vn/images/0%20Phong%204T/Logo/Verfinal/Logo%20VNU%20-%20Chuan.png';
 
 let callSendAPI = (sender_psid, response) => {
     // Construct the message body
@@ -95,22 +95,22 @@ let sendGetStartedTemplate = () => {
                         "type": "postback",
                         "title": "USSH - Đại học Khoa học Xã hội & Nhân văn",
                         "payload": "USSH",
+                    },
+                    {
+                        "type": "postback",
+                        "title": "UIT - Đại học Công nghệ thông tin",
+                        "payload": "UIT",
+                    },
+                    {
+                        "type": "postback",
+                        "title": "UEL - Đại học Kinh tế - Luật",
+                        "payload": "UEL",
+                    },
+                    {
+                        "type": "postback",
+                        "title": "HCMUT - Đại học Bách Khoa",
+                        "payload": "HCMUT",
                     }
-                    // {
-                    //     "type": "postback",
-                    //     "title": "UIT - Đại học Công nghệ thông tin",
-                    //     "payload": "UIT",
-                    // },
-                    // {
-                    //     "type": "postback",
-                    //     "title": "UEL - Đại học Kinh tế - Luật",
-                    //     "payload": "UEL",
-                    // },
-                    // {
-                    //     "type": "postback",
-                    //     "title": "HCMUT - Đại học Bách Khoa",
-                    //     "payload": "HCMUT",
-                    // }
                     ],
                 }]
             }
