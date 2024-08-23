@@ -54,10 +54,12 @@ let handleGetStarted = (sender_psid) => {
         try{
             let username = await getUserName(sender_psid);
             let response1 = { "text": `Chào mừng ${username} đến với wse enroll-bot - Hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM.`}
-            // send text message
-            await callSendAPI(sender_psid, response1);
 
             let response2 = sendGetStartedTemplate();
+
+            // send text message
+            await callSendAPI(sender_psid, response1);
+            
             // send generic template message
             await callSendAPI(sender_psid, response2);
 
@@ -81,7 +83,7 @@ let sendGetStartedTemplate = () => {
                     "buttons": [
                     {
                         "type": "postback",
-                        "title": "TƯ VẤN THEO TRƯỜNG",
+                        "title": "THEO TRƯỜNG",
                         "payload": "UNIVERSITY_SELECT",
                     },
                     {
