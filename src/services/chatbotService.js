@@ -95,22 +95,22 @@ let sendGetStartedTemplate = () => {
                         "type": "postback",
                         "title": "USSH - Đại học Khoa học Xã hội & Nhân văn",
                         "payload": "USSH",
-                    },
-                    {
-                        "type": "postback",
-                        "title": "UIT - Đại học Công nghệ thông tin",
-                        "payload": "UIT",
-                    },
-                    {
-                        "type": "postback",
-                        "title": "UEL - Đại học Kinh tế - Luật",
-                        "payload": "UEL",
-                    },
-                    {
-                        "type": "postback",
-                        "title": "HCMUT - Đại học Bách Khoa",
-                        "payload": "HCMUT",
                     }
+                    // {
+                    //     "type": "postback",
+                    //     "title": "UIT - Đại học Công nghệ thông tin",
+                    //     "payload": "UIT",
+                    // },
+                    // {
+                    //     "type": "postback",
+                    //     "title": "UEL - Đại học Kinh tế - Luật",
+                    //     "payload": "UEL",
+                    // },
+                    // {
+                    //     "type": "postback",
+                    //     "title": "HCMUT - Đại học Bách Khoa",
+                    //     "payload": "HCMUT",
+                    // }
                     ],
                 }]
             }
