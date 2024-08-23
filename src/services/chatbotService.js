@@ -27,10 +27,33 @@ let callSendAPI = (sender_psid, response) => {
     });
 }
 
+let getUserName = async (sender_psid) => {
+    let username = '';
+    // Send the HTTP request to the Messenger Platform
+    await request({
+        "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "GET",
+    }, (err, res, body) => {
+        console.log(body)
+        if (!err) {
+            response = JSON.parse(res);
+            // "first_name": "Peter",
+            // "last_name": "Chang",
+            username = `${response.first_name} ${response.last_name}`
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+
+    return username;
+}
+
 let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
-            let response = { "text": "Chào mừng bạn đến với wse enroll-bot - hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM."}
+            let username = await getUserName(sender_psid);
+            let response = { "text": `Chào mừng ${username} đến với wse enroll-bot - hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM.`}
             await callSendAPI(sender_psid, response);
             resolve("done");
         }catch(e){
