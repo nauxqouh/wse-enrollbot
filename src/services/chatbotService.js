@@ -69,51 +69,25 @@ let handleGetStarted = (sender_psid) => {
 }
 
 let sendGetStartedTemplate = () => {
-    // let response = {
-    //     "attachment": {
-    //         "type": "template",
-    //         "payload": {
-    //             "template_type": "generic",
-    //             "elements": [{
-    //                 "title": "Chọn hệ thống muốn tư vấn:",
-    //                 "subtitle": "Ấn vào nút bấm tương ứng với lựa chọn của bạn.",
-    //                 "image_url": IMAGE_GET_STARTED,
-    //                 "buttons": [
-    //                 {
-    //                     "type": "postback",
-    //                     "title": "TƯ VẤN THEO TRƯỜNG",
-    //                     "payload": "UNIVERSITY_SELECT",
-    //                 },
-    //                 {
-    //                     "type": "postback",
-    //                     "title": "TƯ VẤN CHUNG",
-    //                     "payload": "FAQ",
-    //                 }
-    //                 ],
-    //             }]
-    //         }
-    //     }
-    // }
-
     let response = {
         "attachment": {
             "type": "template",
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Is this the right picture?",
-                    "subtitle": "Tap a button to answer.",
+                    "title": "Chọn hệ thống muốn tư vấn:",
+                    "subtitle": "Ấn vào nút bấm tương ứng với lựa chọn của bạn.",
                     "image_url": IMAGE_GET_STARTED,
                     "buttons": [
                     {
                         "type": "postback",
-                        "title": "Yes!",
-                        "payload": "yes",
+                        "title": "TƯ VẤN THEO TRƯỜNG",
+                        "payload": "UNIVERSITY_SELECT",
                     },
                     {
                         "type": "postback",
-                        "title": "No!",
-                        "payload": "no",
+                        "title": "TƯ VẤN CHUNG",
+                        "payload": "FAQ",
                     }
                     ],
                 }]
