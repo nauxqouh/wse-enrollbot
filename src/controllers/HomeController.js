@@ -1,5 +1,6 @@
 require('dotenv').config();
 import request from "request";
+import chatbotService from "../services/chatbotService";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
@@ -117,7 +118,7 @@ function handleMessage(sender_psid, received_message) {
 }
 
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback) {
     let response;
   
     // Get the payload for the postback
@@ -132,14 +133,14 @@ function handlePostback(sender_psid, received_postback) {
             response = { "text": "Oops, try sending another image." }
             break;
         case "GET_STARTED":
-            response = { "text": "Chào mừng bạn đến với wse enroll-bot - hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM."}
+            await chatbotService.handleGetStarted();
             break;
         default:
             response = { "text": `Oop! Tôi không thể trả lời lệnh ${payload}`}
     }
 
-    // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
+    // // Send the message to acknowledge the postback
+    // callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API
