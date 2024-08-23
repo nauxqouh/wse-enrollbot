@@ -31,7 +31,7 @@ let handleGetStarted = () => {
     return Promise(async (resolve, reject) => {
         try{
             let response = { "text": "Chào mừng bạn đến với wse enroll-bot - hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM."}
-            await this.callSendAPI(response);
+            await callSendAPI(response);
             resolve("done");
         }catch(e){
             reject(e);
