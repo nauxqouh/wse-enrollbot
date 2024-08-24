@@ -249,7 +249,7 @@ let sendAPItoRAGModel = async (user_message, database) => {
     try {
         // Send a POST request to the FastAPI server
         const response = await axios.post(url, data);
-        
+        console.log("Model response: ", response.data);
         // Return the response data (typically the model's output)
         return response.data.response;
     } catch (e) {
