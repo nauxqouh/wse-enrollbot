@@ -253,19 +253,19 @@ let sendToModel = (user_message) => {
 }
 
 // Hàm gửi yêu cầu đến API
-const askQuestion = async (question) => {
+let askQuestion = async (question) => {
     try {
-        // Thay thế URL dưới đây bằng URL của ứng dụng Streamlit
-        const response = await axios.post('https://api.render.com/deploy/srv-cr4aqu0gph6c73bnivt0?key=A8lhzw-cuEI', {
-        question: question
+        const response = await axios.post(PYTHON_SERVICE_URL, {
+            question: question,
+            source: 'your_source_here' // Provide the source value based on your requirements
         });
-        console.log('Get model response!');
-        console.log(response);
-        return response.data;
+        return response.data.response;
     } catch (e) {
-        console.error('Không thể kết nối đến model chatbot.' + e);
+        console.error('Error getting response from Python service:', e);
+        throw new Error('Error getting response from Python service');
     }
-};
+}
+
 
 module.exports = {
     handleGetStarted: handleGetStarted,
