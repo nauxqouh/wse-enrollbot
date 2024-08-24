@@ -209,20 +209,20 @@ let getUniversitySelectTemplate = () => {
 }
 
 
-let handleUserQuestion = async (sender_psid, user_message) => {
+let handleUserQuestion = async (sender_psid, user_message, database) => {
     return new Promise(async (resolve, reject) => {
         try{
             let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút."}
             // Send text message
             await callSendAPI(sender_psid, response1);
 
-            // // Send user message to model and get model response
-            // let model_response = await sendAPItoRAGModeln(user_message);
+            // Send user message to model and get model response
+            let model_response = await sendAPItoRAGModeln(user_message, database);
 
-            // let response2 = { "text" : model_response};
+            let response2 = { "text" : model_response};
 
-            // // Send text message
-            // await callSendAPI(sender_psid, response2);
+            // Send text message
+            await callSendAPI(sender_psid, response2);
 
             resolve("done");
         }catch(e){
@@ -234,8 +234,27 @@ let handleUserQuestion = async (sender_psid, user_message) => {
 }
 
 // Send API to RAG Model
-let sendAPItoRAGModel = async (user_message) => {
-    // return response; // response from RAG Model
+let sendAPItoRAGModel = async (user_message, database) => {
+
+    const url = "https://wse-api-rag.onrender.com/api/query"; // FastAPI URL
+
+    // Create the data object to be sent in the request body
+    const data = {
+        prompt: user_message,
+        database: database
+    };
+
+    try {
+        // Send a POST request to the FastAPI server
+        const response = await axios.post(url, data);
+        
+        // Return the response data (typically the model's output)
+        return response.data.response;
+    } catch (e) {
+        // Handle any errors
+        console.error('Error sending the request:', e);
+        throw e;
+    }
 }
 
 
