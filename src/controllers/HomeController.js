@@ -144,12 +144,7 @@ async function handlePostback(sender_psid, received_postback) {
             await chatbotService.handleSendUniversitySelect(sender_psid);
             break;
         
-        case 'USSH':
-        case 'UEL':
-        case 'UIT':
-        case 'IU':
-        case 'HCMUT':
-        case 'HCMUS':
+        case 'HCMUS_STARTED':
             response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
             break;
         
