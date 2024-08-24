@@ -33,7 +33,7 @@ let postWebhook = (req, res) => {
                 // handleMessage(sender_psid, webhook_event.message);
                 
                 let user_message = webhook_event.message;
-                chatbotService.handleUserQuestion(sender_psid, user_message);
+                chatbotService.handleUserQuestion(sender_psid, user_message, "Trường Đại học Khoa học Tự nhiên");
             } else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
             }
