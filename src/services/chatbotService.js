@@ -112,11 +112,11 @@ let handleSendUniversitySelect = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
 
-            let response3 = getUniversitySelectTemplate();
+            let response3 = getStartedTemplate();
 
             // send generic template message
             await callSendAPI(sender_psid, response3);
-            console.log("Messages sent successfully!");
+            
             resolve("done");
         }catch(e){
             reject(e);
