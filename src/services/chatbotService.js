@@ -1,5 +1,7 @@
 require('dotenv').config();
 import request from "request";
+const axios = require('axios');
+
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const API_MODEL = 'https://api.render.com/deploy/srv-cr4aqu0gph6c73bnivt0?key=A8lhzw-cuEI';
