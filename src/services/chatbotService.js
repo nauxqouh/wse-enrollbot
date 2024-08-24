@@ -115,9 +115,7 @@ let handleSendUniversitySelect = (sender_psid) => {
             let response2 = getUniversitySelectTemplate();
 
             // send generic template message
-            await Promise, all([
-                callSendAPI(sender_psid, response2)
-            ]);
+            await callSendAPI(sender_psid, response2);
             console.log("Messages sent successfully!");
             resolve("done");
         }catch(e){
