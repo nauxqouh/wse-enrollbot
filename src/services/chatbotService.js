@@ -29,6 +29,7 @@ let callSendAPI = (sender_psid, response) => {
         "json": request_body
     }, (err, res, body) => {
         if (!err) {
+            console.log("Response from Facebook: ", body);
             console.log("Sender_PSID nè: " + sender_psid);
             console.log('message sent!')
         } else {
