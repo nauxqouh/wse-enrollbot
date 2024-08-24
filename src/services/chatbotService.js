@@ -1,5 +1,4 @@
 require('dotenv').config();
-const axios = require('axios');
 import request from "request";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -217,13 +216,13 @@ let handleUserQuestion = async (sender_psid, user_message) => {
             // Send text message
             await callSendAPI(sender_psid, response1);
 
-            // Send user message to model and get model response
-            let model_response = await askQuestion(user_message);
+            // // Send user message to model and get model response
+            // let model_response = await sendAPItoRAGModeln(user_message);
 
-            let response2 = { "text" : model_response};
+            // let response2 = { "text" : model_response};
 
-            // Send text message
-            await callSendAPI(sender_psid, response2);
+            // // Send text message
+            // await callSendAPI(sender_psid, response2);
 
             resolve("done");
         }catch(e){
@@ -234,38 +233,9 @@ let handleUserQuestion = async (sender_psid, user_message) => {
     });
 }
 
-let sendToModel = (user_message) => {
-    return new Promise((resolve, reject) => {
-        request({
-            "uri": `https://api-rag-1.onrender.com/`,
-            "method": "POST",
-            "json": { "message": user_message}
-        }, (err, res, body) => {
-            if (!err && res.statusCode == 200) {
-                console.log('Get model response!');
-                console.log(body);
-                resolve(body.response);  // Get model response
-            } else {
-                reject("Không thể kết nối đến model chatbot." + err);
-            }
-        });
-    })
-}
-
-const PYTHON_SERVICE_URL = 'http://localhost:5000/ask';
-
-// Hàm gửi yêu cầu đến API
-let askQuestion = async (question) => {
-    try {
-        const response = await axios.post(PYTHON_SERVICE_URL, {
-            question: question,
-            source: 'your_source_here' // Provide the source value based on your requirements
-        });
-        return response.data.response;
-    } catch (e) {
-        console.error('Error getting response from Python service:', e);
-        throw new Error('Error getting response from Python service');
-    }
+// Send API to RAG Model
+let sendAPItoRAGModel = async (user_message) => {
+    // return response; // response from RAG Model
 }
 
 
