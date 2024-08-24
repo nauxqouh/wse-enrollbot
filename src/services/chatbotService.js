@@ -217,7 +217,7 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
             await callSendAPI(sender_psid, response1);
 
             // Send user message to model and get model response
-            let model_response = await sendAPItoRAGModeln(user_message, database);
+            let model_response = await sendAPItoRAGModel(user_message, database);
 
             let response2 = { "text" : model_response};
 
