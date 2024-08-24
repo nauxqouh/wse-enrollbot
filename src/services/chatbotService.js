@@ -252,6 +252,8 @@ let sendToModel = (user_message) => {
     })
 }
 
+const PYTHON_SERVICE_URL = 'http://localhost:5000/ask';
+
 // Hàm gửi yêu cầu đến API
 let askQuestion = async (question) => {
     try {
