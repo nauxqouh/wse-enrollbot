@@ -256,7 +256,7 @@ let sendToModel = (user_message) => {
 const askQuestion = async (question) => {
     try {
         // Thay thế URL dưới đây bằng URL của ứng dụng Streamlit
-        const response = await axios.post('https://api-rag-1.onrender.com/#wse-bot', {
+        const response = await axios.post('https://api.render.com/deploy/srv-cr4aqu0gph6c73bnivt0?key=A8lhzw-cuEI', {
         question: question
         });
         console.log('Get model response!');
