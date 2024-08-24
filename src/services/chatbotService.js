@@ -1,4 +1,5 @@
 require('dotenv').config();
+const axios = require('axios');
 import request from "request";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -217,7 +218,7 @@ let handleUserQuestion = async (sender_psid, user_message) => {
             await callSendAPI(sender_psid, response1);
 
             // Send user message to model and get model response
-            let model_response = await sendToModel(user_message);
+            let model_response = await askQuestion(user_message);
 
             let response2 = { "text" : model_response};
 
@@ -250,6 +251,28 @@ let sendToModel = (user_message) => {
         });
     })
 }
+
+// Hàm gửi yêu cầu đến API
+const askQuestion = async (question) => {
+    try {
+        // Thay thế URL dưới đây bằng URL của ứng dụng Streamlit
+        const response = await axios.post('https://api-rag-1.onrender.com/#wse-bot', {
+        question: question
+        });
+        console.log('Get model response!');
+        console.log(response);
+        return response.data;
+    } catch (e) {
+        console.error('Không thể kết nối đến model chatbot.' + e);
+    }
+};
+
+// Sử dụng hàm
+askQuestion('Câu hỏi của bạn', 'Nguồn dữ liệu').then(response => {
+  console.log('Response from Streamlit:', response);
+});
+
+
 
 module.exports = {
     handleGetStarted: handleGetStarted,
