@@ -111,8 +111,10 @@ let handleSendUniversitySelect = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
 
-            let response = getUniversitySelectTemplate();
-            await callSendAPI(sender_psid, response);
+            let response2 = getUniversitySelectTemplate();
+
+            // send generic template message
+            await callSendAPI(sender_psid, response2);
 
             resolve("done");
         }catch(e){
@@ -128,84 +130,49 @@ let getUniversitySelectTemplate = () => {
             "payload": {
                 "template_type": "generic",
                 "elements": [
+                {
+                    "title": "HCM-US",
+                    "subtitle": "Trường Đại học Khoa học Tự Nhiên",
+                    "image_url": HCMUS_IMAGE,
+                    "buttons": [
                     {
-                        "title": "HCMUS",
-                        "subtitle": "Đại học Khoa học Tự nhiên",
-                        "image_url": HCMUS_IMAGE,
-                        "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "Chọn",
-                            "payload": "HCMUS",
-                        }
-                        ],
-                    },
-                    {
-                        "title": "USSH",
-                        "subtitle": "Đại học Khoa học Xã hội & Nhân văn",
-                        "image_url": USSH_IMAGE,
-                        "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "Chọn",
-                            "payload": "USSH",
-                        }
-                        ],
-                    },
-                    {
-                        "title": "UEL",
-                        "subtitle": "Đại học Kinh tế - Luật",
-                        "image_url": UEL_IMAGE,
-                        "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "Chọn",
-                            "payload": "UEL",
-                        }
-                        ],
-                    },
-                    {
-                        "title": "UIT",
-                        "subtitle": "Đại học Công nghệ thông tin",
-                        "image_url": UIT_IMAGE,
-                        "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "Chọn",
-                            "payload": "UIT",
-                        }
-                        ],
-                    },
-                    {
-                        "title": "IU",
-                        "subtitle": "Đại học Quốc tế",
-                        "image_url": IU_IMAGE,
-                        "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "Chọn",
-                            "payload": "IU",
-                        }
-                        ],
-                    },
-                    {
-                        "title": "HCMUT",
-                        "subtitle": "Đại học Bách khoa",
-                        "image_url": HCMUT_IMAGE,
-                        "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "Chọn",
-                            "payload": "HCMUT",
-                        }
-                        ],
+                        "type": "postback",
+                        "title": "Chọn",
+                        "payload": "HCMUS",
                     }
+                    ],
+                },
+                {
+                    "title": "HCM-USSH",
+                    "subtitle": "Trường Đại học Khoa học Xã hội & Nhân văn",
+                    "image_url": USSH_IMAGE,
+                    "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Chọn",
+                        "payload": "USSH",
+                    }
+                    ],
+                },
+                {
+                    "title": "UIT",
+                    "subtitle": "Trường Đại học Công nghệ thông tin",
+                    "image_url": UIT_IMAGE,
+                    "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Chọn",
+                        "payload": "UIT",
+                    }
+                    ],
+                }
                 ]
             }
         }
-    };
+    }
     return response;
 }
+
 
 let handleUserQuestion = async (sender_psid, user_message) => {
     return new Promise(async (resolve, reject) => {
