@@ -236,7 +236,7 @@ let handleUserQuestion = async (sender_psid, user_message) => {
 let sendToModel = (user_message) => {
     return new Promise((resolve, reject) => {
         request({
-            "uri": `https://api.render.com/deploy/srv-cr4aqu0gph6c73bnivt0?key=A8lhzw-cuEI`,
+            "uri": `https://api-rag-1.onrender.com/`,
             "method": "POST",
             "json": { "message": user_message}
         }, (err, res, body) => {
