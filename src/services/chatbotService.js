@@ -247,13 +247,18 @@ let sendAPItoRAGModel = async (user_message, database) => {
     };
 
     try {
-        // Send a POST request to the FastAPI server
+        // Gửi yêu cầu POST đến server FastAPI
         const response = await axios.post(url, data);
-        console.log("Model response: ", response.data);
-        // Return the response data (typically the model's output)
-        return response.data.response;
+        console.log("Model response:", response.data);
+
+        // Kiểm tra cấu trúc phản hồi và trả lại dữ liệu từ mô hình
+        if (response.data && response.data.response) {
+            return response.data.response;
+        } else {
+            throw new Error('Unexpected response structure');
+        }
     } catch (e) {
-        // Handle any errors
+        // Xử lý lỗi gửi yêu cầu và thông báo lỗi
         console.error('Error sending the request:', e);
         throw e;
     }
