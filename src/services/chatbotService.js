@@ -267,13 +267,6 @@ const askQuestion = async (question) => {
     }
 };
 
-// Sử dụng hàm
-askQuestion('Câu hỏi của bạn', 'Nguồn dữ liệu').then(response => {
-  console.log('Response from Streamlit:', response);
-});
-
-
-
 module.exports = {
     handleGetStarted: handleGetStarted,
     handleSendUniversitySelect: handleSendUniversitySelect,
