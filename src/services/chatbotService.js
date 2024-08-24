@@ -238,6 +238,7 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
 // Send API to RAG Model
 let sendAPItoRAGModel = async (user_message, database) => {
 
+    const url = "https://wse-api-rag.onrender.com/api/query"
     // Create the data object to be sent in the request body
     const input_data = {
         prompt: user_message,
@@ -246,7 +247,7 @@ let sendAPItoRAGModel = async (user_message, database) => {
 
     try {
         // Gửi yêu cầu POST đến server FastAPI
-        const model_response = await axios.post(API_RAGMODEL, input_data);
+        const model_response = await axios.post(url, input_data);
         console.log("Model response success!");
 
         // Kiểm tra cấu trúc phản hồi và trả lại dữ liệu từ mô hình
