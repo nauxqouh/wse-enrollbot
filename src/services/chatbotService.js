@@ -29,9 +29,7 @@ let callSendAPI = (sender_psid, response) => {
         "json": request_body
     }, (err, res, body) => {
         if (!err) {
-            console.log("Response from Facebook: ", body);
-            console.log("Sender_PSID nè: " + sender_psid);
-            console.log('message sent!')
+            console.log('message sent!');
         } else {
             console.error("Unable to send message:" + err);
         }
@@ -112,7 +110,7 @@ let handleSendUniversitySelect = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
 
-            let response3 = getStartedTemplate();
+            let response3 = getUniversitySelectTemplate();
 
             // send generic template message
             await callSendAPI(sender_psid, response3);
@@ -130,20 +128,23 @@ let getUniversitySelectTemplate = () => {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": [
-                {
-                    "title": "HCM-US",
-                    "subtitle": "Trường Đại học Khoa học Tự Nhiên",
-                    "image_url": HCMUS_IMAGE,
+                "elements": [{
+                    "title": "Chọn hệ thống muốn tư vấn:",
+                    "subtitle": "Ấn vào nút bấm tương ứng với lựa chọn của bạn.",
+                    "image_url": IMAGE_GET_STARTED,
                     "buttons": [
                     {
                         "type": "postback",
-                        "title": "Chọn",
+                        "title": "THEO TRƯỜNG",
                         "payload": "HCMUS_STARTED",
                     },
+                    {
+                        "type": "postback",
+                        "title": "TƯ VẤN CHUNG",
+                        "payload": "FAQ",
+                    }
                     ],
-                }
-                ]
+                }]
             }
         }
     }

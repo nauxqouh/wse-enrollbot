@@ -30,10 +30,10 @@ let postWebhook = (req, res) => {
             // Check if the event is a message or postback and
             // pass the event to the appropriate handler function
             if (webhook_event.message) {
-                // handleMessage(sender_psid, webhook_event.message);
+                handleMessage(sender_psid, webhook_event.message);
                 
-                let user_message = webhook_event.message;
-                chatbotService.handleUserQuestion(sender_psid, user_message);
+                // let user_message = webhook_event.message;
+                // chatbotService.handleUserQuestion(sender_psid, user_message);
             } else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
             }
