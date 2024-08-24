@@ -144,8 +144,14 @@ async function handlePostback(sender_psid, received_postback) {
             await chatbotService.handleSendUniversitySelect(sender_psid);
             break;
         
-        case 'HCMUS_STARTED':
+        case 'USSH':
+        case 'UIT':
+        case 'IU':
+        case 'HCMUT':
+        case 'UEL':
+        case 'HCMUS':
             response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            callSendAPI(sender_psid, response);
             break;
         
         default:

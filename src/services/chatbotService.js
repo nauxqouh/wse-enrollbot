@@ -110,10 +110,10 @@ let handleSendUniversitySelect = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
 
-            let response3 = getUniversitySelectTemplate();
+            let response = getUniversitySelectTemplate();
 
             // send generic template message
-            await callSendAPI(sender_psid, response3);
+            await callSendAPI(sender_psid, response);
             
             resolve("done");
         }catch(e){
@@ -128,23 +128,80 @@ let getUniversitySelectTemplate = () => {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": [{
-                    "title": "Chọn hệ thống muốn tư vấn:",
-                    "subtitle": "Ấn vào nút bấm tương ứng với lựa chọn của bạn.",
-                    "image_url": IMAGE_GET_STARTED,
+                "elements": [
+                {
+                    "title": "HCM-US",
+                    "subtitle": "Trường Đại học Khoa học Tự Nhiên",
+                    "image_url": HCMUS_IMAGE,
                     "buttons": [
                     {
                         "type": "postback",
-                        "title": "THEO TRƯỜNG",
-                        "payload": "HCMUS_STARTED",
+                        "title": "Chọn",
+                        "payload": "HCMUS",
                     },
+                    ],
+                },
+                {
+                    "title": "HCM-USSH",
+                    "subtitle": "Trường Đại học Khoa học Xã hội & Nhân văn",
+                    "image_url": USSH_IMAGE,
+                    "buttons": [
                     {
                         "type": "postback",
-                        "title": "TƯ VẤN CHUNG",
-                        "payload": "FAQ",
-                    }
+                        "title": "Chọn",
+                        "payload": "USSH",
+                    },
                     ],
-                }]
+                },
+                {
+                    "title": "HCM-UIT",
+                    "subtitle": "Trường Đại học Công nghệ thông tin",
+                    "image_url": UIT_IMAGE,
+                    "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Chọn",
+                        "payload": "UIT",
+                    },
+                    ],
+                },
+                {
+                    "title": "HCM-IU",
+                    "subtitle": "Trường Đại học Quốc tế",
+                    "image_url": IU_IMAGE,
+                    "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Chọn",
+                        "payload": "IU",
+                    },
+                    ],
+                },
+                {
+                    "title": "HCM-HCMUT",
+                    "subtitle": "Trường Đại học Bách Khoa",
+                    "image_url": HCMUT_IMAGE,
+                    "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Chọn",
+                        "payload": "HCMUT",
+                    },
+                    ],
+                },
+                {
+                    "title": "HCM-UEL",
+                    "subtitle": "Trường Đại học Kinh tế - Luật",
+                    "image_url": UEL_IMAGE,
+                    "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Chọn",
+                        "payload": "UEL",
+                    },
+                    ],
+                }
+                ]
             }
         }
     }
@@ -173,26 +230,7 @@ let handleUserQuestion = async (sender_psid, user_message) => {
             await callSendAPI(sender_psid, response);
             reject(e);
         }
-    })
-
-    // try {
-    //     if (received_message.text) {    
-    //         // Send user message to model and get model response
-    //         let model_response = await sendToModel(user_message);
-
-    //         let response = { "text" : model_response};
-
-    //         // Send text message
-    //         await callSendAPI(sender_psid, response);
-
-    //     } else if (received_message.attachments) {
-    //         let response = { "text" : "Không thể xử lý tin nhắn với định dạng này."};
-    //     }
-    // } catch(e){
-    //     console.error("Error handling message:", e);
-    //     let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
-    //     await callSendAPI(sender_psid, response); 
-    // }
+    });
 }
 
 let sendToModel = (user_message) => {
