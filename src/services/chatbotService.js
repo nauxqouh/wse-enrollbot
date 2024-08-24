@@ -4,7 +4,7 @@ const axios = require('axios');
 
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-const API_MODEL = 'https://api.render.com/deploy/srv-cr4aqu0gph6c73bnivt0?key=A8lhzw-cuEI';
+const API_RAGMODEL = process.env.API_RAGMODEL;
 
 const IMAGE_GET_STARTED = 'https://static.vnuhcm.edu.vn/images/0%20Phong%204T/Logo/Verfinal/Logo%20VNU%20-%20Chuan.png';
 const HCMUS_IMAGE = 'https://cdn-media.sforum.vn/storage/app/media/hoc-phi-hcmus-thumbnail.jpg';
@@ -238,21 +238,19 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
 // Send API to RAG Model
 let sendAPItoRAGModel = async (user_message, database) => {
 
-    const url = "https://wse-api-rag.onrender.com/api/query"; // FastAPI URL
-
     // Create the data object to be sent in the request body
-    const data = {
+    const input_data = {
         prompt: user_message,
-        database: database
+        database: "Trường Đại học Khoa học Tự nhiên"
     };
 
     try {
         // Gửi yêu cầu POST đến server FastAPI
-        const response = await axios.post(url, data);
-        console.log("Model response:", response.data);
+        const model_response = await axios.post(API_RAGMODEL, input_data);
+        console.log("Model response success!");
 
         // Kiểm tra cấu trúc phản hồi và trả lại dữ liệu từ mô hình
-        if (response.data && response.data.response) {
+        if (response.data) {
             return response.data.response;
         } else {
             throw new Error('Unexpected response structure');
