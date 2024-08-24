@@ -139,33 +139,33 @@ let getUniversitySelectTemplate = () => {
                         "type": "postback",
                         "title": "Chọn",
                         "payload": "HCMUS",
-                    }
+                    },
                     ],
                 },
-                {
-                    "title": "HCM-USSH",
-                    "subtitle": "Trường Đại học Khoa học Xã hội & Nhân văn",
-                    "image_url": USSH_IMAGE,
-                    "buttons": [
-                    {
-                        "type": "postback",
-                        "title": "Chọn",
-                        "payload": "USSH",
-                    }
-                    ],
-                },
-                {
-                    "title": "UIT",
-                    "subtitle": "Trường Đại học Công nghệ thông tin",
-                    "image_url": UIT_IMAGE,
-                    "buttons": [
-                    {
-                        "type": "postback",
-                        "title": "Chọn",
-                        "payload": "UIT",
-                    }
-                    ],
-                }
+                // {
+                //     "title": "HCM-USSH",
+                //     "subtitle": "Trường Đại học Khoa học Xã hội & Nhân văn",
+                //     "image_url": USSH_IMAGE,
+                //     "buttons": [
+                //     {
+                //         "type": "postback",
+                //         "title": "Chọn",
+                //         "payload": "USSH",
+                //     },
+                //     ],
+                // },
+                // {
+                //     "title": "UIT",
+                //     "subtitle": "Trường Đại học Công nghệ thông tin",
+                //     "image_url": UIT_IMAGE,
+                //     "buttons": [
+                //     {
+                //         "type": "postback",
+                //         "title": "Chọn",
+                //         "payload": "UIT",
+                //     },
+                //     ],
+                // }
                 ]
             }
         }
