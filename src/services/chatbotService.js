@@ -241,6 +241,8 @@ let sendToModel = (user_message) => {
             "json": { "message": user_message}
         }, (err, res, body) => {
             if (!err && res.statusCode == 200) {
+                console.log('Get model response!');
+                console.log(body);
                 resolve(body.response);  // Get model response
             } else {
                 reject("Không thể kết nối đến model chatbot." + err);
