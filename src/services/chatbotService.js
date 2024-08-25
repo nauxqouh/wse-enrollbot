@@ -276,7 +276,6 @@ let sendAPItoRAGModel = async (user_message, database) => {
     // Define the API endpoint and the request payload
     const url = "https://wse-api-rag.onrender.com/api/query"; // FastAPI URL
 
-    user_message = { "text": user_message}
     const data = {
         prompt: user_message,
         database: "Trường Đại học Khoa học Tự nhiên"
