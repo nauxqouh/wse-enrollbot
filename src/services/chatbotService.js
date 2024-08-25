@@ -212,27 +212,6 @@ let getUniversitySelectTemplate = () => {
 
 
 let handleUserQuestion = async (sender_psid, user_message, database) => {
-    // return new Promise(async (resolve, reject) => {
-    //     try{
-    //         let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút."}
-    //         // Send text message
-    //         await callSendAPI(sender_psid, response1);
-
-    //         // Send user message to model and get model response
-    //         let model_response = await sendAPItoRAGModel(user_message, database);
-
-    //         let response2 = { "text" : model_response};
-
-    //         // Send text message
-    //         await callSendAPI(sender_psid, response2);
-
-    //         resolve("done");
-    //     }catch(e){
-    //         let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
-    //         await callSendAPI(sender_psid, response);
-    //         reject(e);
-    //     }
-    // });
     try {
         let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút." }
         // Send text message
@@ -255,24 +234,6 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
 
 // Send API to RAG Model
 let sendAPItoRAGModel = async (user_message, database) => {
-
-    // // Define the API endpoint and the request payload
-    // const url = "https://wse-api-rag.onrender.com/api/query"; // FastAPI URL
-    // const data = {
-    //     prompt: "Làm sao để có học bổng",
-    //     database: "Trường Đại học Khoa học Tự nhiên"
-    // };
-
-    // // Make the POST request
-    // axios.post(url, data)
-    //     .then(response => {
-    //         console.log(response.data.response); // Handle the response data
-    //         console.log("Model response success!");
-    //         return response.data.response
-    //     })
-    //     .catch(error => {
-    //         console.error('Error making the request:', error); // Handle errors
-    //     });
     // Define the API endpoint and the request payload
     const url = "https://wse-api-rag.onrender.com/api/query"; // FastAPI URL
 
