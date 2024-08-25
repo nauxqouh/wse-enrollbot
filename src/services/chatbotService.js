@@ -213,9 +213,9 @@ let getUniversitySelectTemplate = () => {
 
 let handleUserQuestion = async (sender_psid, user_message, database) => {
     try {
-        let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút." }
-        // Send text message
-        await callSendAPI(sender_psid, response1);
+        // let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút." }
+        // // Send text message
+        // await callSendAPI(sender_psid, response1);
 
         // Show typing indicator
         sendTypingIndicator(sender_psid, true);
