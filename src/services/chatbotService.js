@@ -249,7 +249,7 @@ let sendAPItoRAGModel = async (user_message, database) => {
     axios.post(url, data)
         .then(response => {
             console.log(response.data.response); // Handle the response data
-            onsole.log("Model response success!");
+            console.log("Model response success!");
             return response.data.response
         })
         .catch(error => {
