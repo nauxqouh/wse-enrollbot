@@ -241,7 +241,7 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
 // Send API to RAG Model
 let sendAPItoRAGModel = async (user_message, database) => {
     // Define the API endpoint and the request payload
-    const url = "https://wse-api-rag.onrender.com/api/query"; // FastAPI URL
+    const url = "https://wse-enroll-chatbot.onrender.com/api/query"; // FastAPI URL
 
     const data = {
         prompt: user_message,
