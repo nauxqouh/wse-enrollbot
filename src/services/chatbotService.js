@@ -239,7 +239,7 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
         await callSendAPI(sender_psid, response1);
 
         // Send user message to model and get model response
-        let model_response = await sendAPItoRAGModel(user_message, database);
+        let model_response = await sendAPItoRAGModel(user_message, "Trường Đại học Khoa học Tự nhiên");
 
         let response2 = { "text": model_response };
 
@@ -276,8 +276,8 @@ let sendAPItoRAGModel = async (user_message, database) => {
     // Define the API endpoint and the request payload
     const url = "https://wse-api-rag.onrender.com/api/query"; // FastAPI URL
     const data = {
-        prompt: user_message, // Use the actual user message
-        database: "Trường Đại học Khoa học Tự nhiên" // Use the provided database
+        prompt: "Làm sao để có học bổng",
+        database: "Trường Đại học Khoa học Tự nhiên"
     };
 
     try {
