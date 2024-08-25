@@ -238,29 +238,46 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
 // Send API to RAG Model
 let sendAPItoRAGModel = async (user_message, database) => {
 
-    const url = "https://wse-api-rag.onrender.com/api/query"
-    // Create the data object to be sent in the request body
-    const input_data = {
-        prompt: user_message,
+    // Define the API endpoint and the request payload
+    const url = "https://wse-api-rag.onrender.com/api/query"; // FastAPI URL
+    const data = {
+        prompt: "Làm sao để có học bổng",
         database: "Trường Đại học Khoa học Tự nhiên"
     };
 
-    try {
-        // Gửi yêu cầu POST đến server FastAPI
-        const model_response = await axios.post(url, input_data);
-        console.log("Model response success!");
+    // Make the POST request
+    axios.post(url, data)
+        .then(response => {
+            console.log(response.data.response); // Handle the response data
+            onsole.log("Model response success!");
+            return response.data.response
+        })
+        .catch(error => {
+            console.error('Error making the request:', error); // Handle errors
+        });
+    // const url = "https://wse-api-rag.onrender.com/api/query"
+    // // Create the data object to be sent in the request body
+    // const input_data = {
+    //     prompt: user_message,
+    //     database: "Trường Đại học Khoa học Tự nhiên"
+    // };
 
-        // Kiểm tra cấu trúc phản hồi và trả lại dữ liệu từ mô hình
-        if (response.data) {
-            return response.data.response;
-        } else {
-            throw new Error('Unexpected response structure');
-        }
-    } catch (e) {
-        // Xử lý lỗi gửi yêu cầu và thông báo lỗi
-        console.error('Error sending the request:', e);
-        throw e;
-    }
+    // try {
+    //     // Gửi yêu cầu POST đến server FastAPI
+    //     const model_response = await axios.post(url, input_data);
+    //     console.log("Model response success!");
+
+    //     // Kiểm tra cấu trúc phản hồi và trả lại dữ liệu từ mô hình
+    //     if (response.data) {
+    //         return response.data.response;
+    //     } else {
+    //         throw new Error('Unexpected response structure');
+    //     }
+    // } catch (e) {
+    //     // Xử lý lỗi gửi yêu cầu và thông báo lỗi
+    //     console.error('Error sending the request:', e);
+    //     throw e;
+    // }
 }
 
 
