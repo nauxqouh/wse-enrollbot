@@ -217,6 +217,9 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
         // Send text message
         await callSendAPI(sender_psid, response1);
 
+        // Show typing indicator
+        sendTypingIndicator(sender_psid, true);
+
         // Send user message to model and get model response
         let model_response = await sendAPItoRAGModel(user_message, "Trường Đại học Khoa học Tự nhiên");
 
@@ -224,6 +227,9 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
 
         // Send text message
         await callSendAPI(sender_psid, response2);
+
+        // Hide typing indicator
+        sendTypingIndicator(sender_psid, false);
 
     } catch (e) {
         let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
@@ -254,6 +260,29 @@ let sendAPItoRAGModel = async (user_message, database) => {
     }
 }
 
+function sendTypingIndicator(sender_psid, isTyping) {
+    let sender_action = isTyping ? "typing_on" : "typing_off";
+
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "sender_action": sender_action
+    };
+
+    request({
+        "uri": "https://graph.facebook.com/v2.6/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log(`Typing indicator sent: ${sender_action}`);
+        } else {
+            console.error("Unable to send typing indicator: " + err);
+        }
+    });
+}
 
 module.exports = {
     handleGetStarted: handleGetStarted,
