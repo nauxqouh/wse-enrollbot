@@ -63,14 +63,21 @@ let handleGetStarted = (sender_psid) => {
         try{
             let username = await getUserName(sender_psid);
             let response1 = { "text": `Chào mừng ${username} đến với wse enroll-bot - Hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM.`}
-
-            let response2 = getStartedTemplate();
+            let response2 = { "text": `Chúng tôi rất vui được đồng hành cùng bạn trong hành trình tìm hiểu và chọn lựa trường học phù hợp. Hệ thống của chúng tôi cung cấp thông tin chi tiết về từng trường thuộc ĐHQG-HCM, giúp bạn dễ dàng khám phá các yêu cầu tuyển sinh, chương trình đào tạo và các cơ hội học tập.`}
+            let response3 = { "text": `Ngoài việc tư vấn về các trường, chúng tôi cũng sẵn sàng hỗ trợ bạn với các thông tin hữu ích khác như kí túc xá, xe bus và các tiện ích khác để bạn có thể chuẩn bị tốt nhất cho cuộc sống sinh viên của mình.`}
+            let response4 = { "text": `Trong quá trình nếu hệ thống gặp sự cố, hãy thử bấm khởi động lại ở góc dưới bên phải cuộc hội thoại. Hoặc bạn có thể thử lại sau và đừng ngần ngại liên hệ cho chúng tôi.`}
+            let response5 = { "text": `Để bắt đầu, vui lòng chọn trường bạn quan tâm từ danh sách dưới đây.\n Chúc bạn có một trải nghiệm tìm kiếm thông tin thuận lợi!`}
+            let response6 = getUniversitySelectTemplate();
 
             // send text message
             await callSendAPI(sender_psid, response1);
+            await callSendAPI(sender_psid, response2);
+            await callSendAPI(sender_psid, response3);
+            await callSendAPI(sender_psid, response4);
+            await callSendAPI(sender_psid, response5);
 
             // send generic template message
-            await callSendAPI(sender_psid, response2);
+            await callSendAPI(sender_psid, response6);
 
             resolve("done");
         }catch(e){
