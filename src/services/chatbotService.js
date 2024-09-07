@@ -69,17 +69,15 @@ let handleGetStarted = (sender_psid) => {
             let response5 = { "text": `Để bắt đầu, vui lòng chọn trường bạn quan tâm từ danh sách dưới đây.\n Chúc bạn có một trải nghiệm tìm kiếm thông tin thuận lợi!`}
             let response6 = getUniversitySelectTemplate();
 
-            // send text message
-            await callSendAPI(sender_psid, response1);
-            await callSendAPI(sender_psid, response2);
-            await callSendAPI(sender_psid, response3);
-            await callSendAPI(sender_psid, response4);
-            await callSendAPI(sender_psid, response5);
-
-            // send generic template message
-            await callSendAPI(sender_psid, response6);
-
-            resolve("done");
+            // Gửi từng tin nhắn theo thứ tự
+            await callSendAPI(sender_psid, response1)
+                .then(() => callSendAPI(sender_psid, response2))
+                .then(() => callSendAPI(sender_psid, response3))
+                .then(() => callSendAPI(sender_psid, response4))
+                .then(() => callSendAPI(sender_psid, response5))
+                .then(() => callSendAPI(sender_psid, response6))
+                .then(() => resolve("done"))
+                .catch((error) => reject(error));
         }catch(e){
             reject(e);
         }

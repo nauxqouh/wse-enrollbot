@@ -148,31 +148,31 @@ async function handlePostback(sender_psid, received_postback) {
         
         case 'USSH':
             database = "Trường Đại Học Khoa Học Xã Hội - Nhân Văn"
-            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            response = { "text": "BẮT ĐẦU!\nHãy đặt một câu hỏi." }
             callSendAPI(sender_psid, response);
             break;
         case 'UIT':
             database = "Trường Đại học Công nghệ Thông tin"
-            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            response = { "text": "BẮT ĐẦU!\nHãy đặt một câu hỏi." }
             callSendAPI(sender_psid, response);
             break;
         case 'IU':
             database = "Trường Đại Học Quốc Tế"
-            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            response = { "text": "BẮT ĐẦU!\nHãy đặt một câu hỏi." }
             callSendAPI(sender_psid, response);
             break;
         case 'HCMUT':
             database = "Trường Đại Học Bách Khoa"
-            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            response = { "text": "BẮT ĐẦU!\nHãy đặt một câu hỏi." }
             callSendAPI(sender_psid, response);
             break;
         case 'UEL':
             database = "Trường Đại Học Kinh tế - Luật"
-            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            response = { "text": "BẮT ĐẦU!\nHãy đặt một câu hỏi." }
             callSendAPI(sender_psid, response);
             break;
         case 'HCMUS':
-            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            response = { "text": "BẮT ĐẦU!\nHãy đặt một câu hỏi." }
             callSendAPI(sender_psid, response);
             break;
         
