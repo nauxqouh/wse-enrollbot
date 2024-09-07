@@ -15,26 +15,51 @@ const IU_IMAGE = 'https://xdcs.cdnchinhphu.vn/thumb_w/640/446259493575335936/202
 const HCMUT_IMAGE = 'https://lms.hcmut.edu.vn/pluginfile.php/3/theme_academi/slide2image/1723683411/slbktv.jpg';
 
 let callSendAPI = (sender_psid, response) => {
-    // Construct the message body
-    let request_body = {
-        "recipient": {
-        "id": sender_psid
-        },
-        "message": response
-    }
+    // // Construct the message body
+    // let request_body = {
+    //     "recipient": {
+    //     "id": sender_psid
+    //     },
+    //     "message": response
+    // }
 
-    // Send the HTTP request to the Messenger Platform
-    request({
-        "uri": "https://graph.facebook.com/v9.0/me/messages",
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!');
-        } else {
-            console.error("Unable to send message:" + err);
+    // // Send the HTTP request to the Messenger Platform
+    // request({
+    //     "uri": "https://graph.facebook.com/v9.0/me/messages",
+    //     "qs": { "access_token": PAGE_ACCESS_TOKEN },
+    //     "method": "POST",
+    //     "json": request_body
+    // }, (err, res, body) => {
+    //     if (!err) {
+    //         console.log('message sent!');
+    //     } else {
+    //         console.error("Unable to send message:" + err);
+    //     }
+    // });
+
+    return new Promise((resolve, reject) => {
+        let request_body = {
+            "recipient": {
+            "id": sender_psid
+            },
+            "message": response
         }
+
+        // Send the HTTP request to the Messenger Platform
+        request({
+            "uri": "https://graph.facebook.com/v9.0/me/messages",
+            "qs": { "access_token": PAGE_ACCESS_TOKEN },
+            "method": "POST",
+            "json": request_body
+        }, (err, res, body) => {
+            if (!err) {
+                console.log('Message sent!');
+                resolve('Message sent!');
+            } else {
+                console.error('Unable to send message:' + err);
+                reject(err);
+            }
+        });
     });
 }
 
