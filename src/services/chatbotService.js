@@ -88,7 +88,8 @@ let handleGetStarted = (sender_psid) => {
             const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
             await callSendAPI(sender_psid, response1);
-            await delay(4000);  // Delay 1 giây (1000ms)
+            sendTypingIndicator(sender_psid, true);
+            await delay(4000);
             await callSendAPI(sender_psid, response2);
             await delay(8000);
             await callSendAPI(sender_psid, response3);
@@ -97,8 +98,8 @@ let handleGetStarted = (sender_psid) => {
             await delay(6000);
             await callSendAPI(sender_psid, response5);
             await delay(3000);
-
             await callSendAPI(sender_psid, response6);
+            sendTypingIndicator(sender_psid, false);
 
             resolve("done");
         }catch(e){
