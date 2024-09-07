@@ -15,28 +15,6 @@ const IU_IMAGE = 'https://xdcs.cdnchinhphu.vn/thumb_w/640/446259493575335936/202
 const HCMUT_IMAGE = 'https://lms.hcmut.edu.vn/pluginfile.php/3/theme_academi/slide2image/1723683411/slbktv.jpg';
 
 let callSendAPI = (sender_psid, response) => {
-    // // Construct the message body
-    // let request_body = {
-    //     "recipient": {
-    //     "id": sender_psid
-    //     },
-    //     "message": response
-    // }
-
-    // // Send the HTTP request to the Messenger Platform
-    // request({
-    //     "uri": "https://graph.facebook.com/v9.0/me/messages",
-    //     "qs": { "access_token": PAGE_ACCESS_TOKEN },
-    //     "method": "POST",
-    //     "json": request_body
-    // }, (err, res, body) => {
-    //     if (!err) {
-    //         console.log('message sent!');
-    //     } else {
-    //         console.error("Unable to send message:" + err);
-    //     }
-    // });
-
     return new Promise((resolve, reject) => {
         let request_body = {
             "recipient": {
@@ -94,15 +72,33 @@ let handleGetStarted = (sender_psid) => {
             let response5 = { "text": `Để bắt đầu, vui lòng chọn trường bạn quan tâm từ danh sách dưới đây.\n Chúc bạn có một trải nghiệm tìm kiếm thông tin thuận lợi!`}
             let response6 = getUniversitySelectTemplate();
 
-            // Gửi từng tin nhắn theo thứ tự
-            await callSendAPI(sender_psid, response1)
-                .then(() => callSendAPI(sender_psid, response2))
-                .then(() => callSendAPI(sender_psid, response3))
-                .then(() => callSendAPI(sender_psid, response4))
-                .then(() => callSendAPI(sender_psid, response5))
-                .then(() => callSendAPI(sender_psid, response6))
-                .then(() => resolve("done"))
-                .catch((error) => reject(error));
+            // // Send message
+            // await callSendAPI(sender_psid, response1)
+            //     .then(() => callSendAPI(sender_psid, response2))
+            //     .then(() => callSendAPI(sender_psid, response3))
+            //     .then(() => callSendAPI(sender_psid, response4))
+            //     .then(() => callSendAPI(sender_psid, response5))
+            //     .then(() => callSendAPI(sender_psid, response6))
+            //     .then(() => resolve("done"))
+            //     .catch((error) => reject(error));
+
+            // Create delay
+            const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+            await callSendAPI(sender_psid, response1);
+            await delay(4000);  // Delay 1 giây (1000ms)
+            await callSendAPI(sender_psid, response2);
+            await delay(8000);
+            await callSendAPI(sender_psid, response3);
+            await delay(8000);
+            await callSendAPI(sender_psid, response4);
+            await delay(6000);
+            await callSendAPI(sender_psid, response5);
+            await delay(3000);
+
+            await callSendAPI(sender_psid, response6);
+
+            resolve("done");
         }catch(e){
             reject(e);
         }
