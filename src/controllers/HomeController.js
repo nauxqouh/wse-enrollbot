@@ -3,6 +3,7 @@ import request from "request";
 import chatbotService from "../services/chatbotService";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+let database = "Trường Đại học Khoa học Tự nhiên";
 
 // process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
@@ -33,7 +34,7 @@ let postWebhook = (req, res) => {
                 // handleMessage(sender_psid, webhook_event.message);
                 
                 let user_message = webhook_event.message.text;
-                chatbotService.handleUserQuestion(sender_psid, user_message, "Trường Đại học Khoa học Tự nhiên");
+                chatbotService.handleUserQuestion(sender_psid, user_message, database);
             } else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
             }
@@ -123,10 +124,11 @@ function handleMessage(sender_psid, received_message) {
 // Handles messaging_postbacks events
 async function handlePostback(sender_psid, received_postback) {
     let response;
-  
+
     // Get the payload for the postback
     let payload = received_postback.payload;
-  
+    
+    chatbotService.sendTypingIndicator(sender_psid, true);
     // Set the response based on the postback payload
     switch(payload) {
         case 'yes':
@@ -145,10 +147,30 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         
         case 'USSH':
+            database = "Trường Đại Học Khoa Học Xã Hội - Nhân Văn"
+            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            callSendAPI(sender_psid, response);
+            break;
         case 'UIT':
+            database = "Trường Đại học Công nghệ Thông tin"
+            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            callSendAPI(sender_psid, response);
+            break;
         case 'IU':
+            database = "Trường Đại Học Quốc Tế"
+            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            callSendAPI(sender_psid, response);
+            break;
         case 'HCMUT':
+            database = "Trường Đại Học Bách Khoa"
+            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            callSendAPI(sender_psid, response);
+            break;
         case 'UEL':
+            database = "Trường Đại Học Kinh tế - Luật"
+            response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
+            callSendAPI(sender_psid, response);
+            break;
         case 'HCMUS':
             response = { "text": "BẮT ĐẦU! Hãy đặt một câu hỏi..." }
             callSendAPI(sender_psid, response);
@@ -158,6 +180,7 @@ async function handlePostback(sender_psid, received_postback) {
             response = { "text": `Oop! Tôi không thể trả lời lệnh ${payload}`}
     }
 
+    chatbotService.sendTypingIndicator(sender_psid, false);
     // // Send the message to acknowledge the postback
     // callSendAPI(sender_psid, response);
 }

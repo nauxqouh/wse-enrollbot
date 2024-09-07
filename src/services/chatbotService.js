@@ -221,7 +221,7 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
         sendTypingIndicator(sender_psid, true);
 
         // Send user message to model and get model response
-        let model_response = await sendAPItoRAGModel(user_message, "Trường Đại học Khoa học Tự nhiên");
+        let model_response = await sendAPItoRAGModel(user_message, database);
 
         let response2 = { "text": model_response };
 
@@ -245,11 +245,12 @@ let sendAPItoRAGModel = async (user_message, database) => {
 
     const data = {
         prompt: user_message,
-        database: "Trường Đại học Khoa học Tự nhiên"
+        database: database
     };
 
     try {
         // Make the POST request
+        console.log(database);
         const response = await axios.post(url, data);
         console.log(response.data.response); // Handle the response data
         console.log("Model response success!");
@@ -287,5 +288,6 @@ function sendTypingIndicator(sender_psid, isTyping) {
 module.exports = {
     handleGetStarted: handleGetStarted,
     handleSendUniversitySelect: handleSendUniversitySelect,
-    handleUserQuestion: handleUserQuestion
+    handleUserQuestion: handleUserQuestion,
+    sendTypingIndicator: sendTypingIndicator
 }
