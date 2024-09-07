@@ -16,7 +16,6 @@ const HCMUT_IMAGE = 'https://lms.hcmut.edu.vn/pluginfile.php/3/theme_academi/sli
 
 let callSendAPI = (sender_psid, response) => {
     return new Promise((resolve, reject) => {
-        sendTypingIndicator(sender_psid, true);
         let request_body = {
             "recipient": {
             "id": sender_psid
@@ -39,7 +38,6 @@ let callSendAPI = (sender_psid, response) => {
                 reject(err);
             }
         });
-        sendTypingIndicator(sender_psid, false);
     });
 }
 
@@ -87,8 +85,8 @@ let handleGetStarted = (sender_psid) => {
             // Create delay
             const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-            await callSendAPI(sender_psid, response1);
             sendTypingIndicator(sender_psid, true);
+            await callSendAPI(sender_psid, response1);
             await delay(4000);
             await callSendAPI(sender_psid, response2);
             await delay(8000);
