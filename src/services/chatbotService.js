@@ -2,6 +2,7 @@ require('dotenv').config();
 import request from "request";
 const axios = require('axios');
 
+const userLastFiveMessages = require('../controllers/HomeController');
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const API_RAGMODEL = process.env.API_RAGMODEL;
@@ -238,7 +239,7 @@ let getUniversitySelectTemplate = () => {
 }
 
 
-let handleUserQuestion = async (sender_psid, user_message, database) => {
+let handleUserQuestion = async (sender_psid, user_message, message_history, database) => {
     try {
         // let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút." }
         // // Send text message
@@ -248,7 +249,7 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
         sendTypingIndicator(sender_psid, true);
 
         // Send user message to model and get model response
-        let model_response = await sendAPItoRAGModel(user_message, database);
+        let model_response = await sendAPItoRAGModel(user_message, message_history, database);
 
         let response2 = { "text": model_response };
 
@@ -266,12 +267,13 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
 }
 
 // Send API to RAG Model
-let sendAPItoRAGModel = async (user_message, database) => {
+let sendAPItoRAGModel = async (user_message, message_history, database) => {
     // Define the API endpoint and the request payload
     const url = "https://wse-enroll-chatbot.onrender.com/api/query"; // FastAPI URL
 
     const data = {
         prompt: user_message,
+        message_history: message_history,
         database: database
     };
 
@@ -312,9 +314,25 @@ function sendTypingIndicator(sender_psid, isTyping) {
     });
 }
 
+function addMessage(sender_psid, new_message) {
+    // Create empty list
+    if (!userLastFiveMessages[sender_psid]) {
+        userLastFiveMessages[sender_psid] = [];
+    }
+    // Add new message
+    userLastFiveMessages[sender_psid].push(new_message);
+
+    // Just save last five messages
+    if (userLastFiveMessages[sender_psid].length > 5) {
+        userLastFiveMessages[sender_psid].shift(); // Xóa tin nhắn cũ nhất
+    }
+}
+
+
 module.exports = {
     handleGetStarted: handleGetStarted,
     handleSendUniversitySelect: handleSendUniversitySelect,
     handleUserQuestion: handleUserQuestion,
-    sendTypingIndicator: sendTypingIndicator
+    sendTypingIndicator: sendTypingIndicator,
+    addMessage: addMessage
 }

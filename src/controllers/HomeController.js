@@ -4,6 +4,7 @@ import chatbotService from "../services/chatbotService";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let database = "Trường Đại học Khoa học Tự nhiên";
+let userLastFiveMessages = {};
 
 // process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
@@ -34,7 +35,8 @@ let postWebhook = (req, res) => {
                 // handleMessage(sender_psid, webhook_event.message);
                 
                 let user_message = webhook_event.message.text;
-                chatbotService.handleUserQuestion(sender_psid, user_message, database);
+                chatbotService.addMessage(sender_psid, user_message);
+                chatbotService.handleUserQuestion(sender_psid, user_message, userLastFiveMessages[sender_psid], database);
             } else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
             }
@@ -249,13 +251,19 @@ let setupPersistentMenu = async (req, res) => {
                     "call_to_actions": [
                         {
                             "type": "web_url",
-                            "title": "Facebook Page WSE Enroll-bot",
+                            "title": "Facebook Page",
                             "url": "https://www.facebook.com/profile.php?id=61564356523160",
                             "webview_height_ratio": "full"
                         },
                         {
+                            "type": "web_url",
+                            "title": "ChatBot Web",
+                            "url": "https://enroll-chatbot-test.streamlit.app/",
+                            "webview_height_ratio": "full"
+                        },
+                        {
                             "type": "postback",
-                            "title": "Khởi động lại cuộc hội thoại",
+                            "title": "Restart",
                             "payload": "RESTART_BOT"
                         }
                     ]
@@ -281,12 +289,12 @@ let setupPersistentMenu = async (req, res) => {
     return res.send("Setup persistent menu succeeds!");
 }
 
-
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
-    setupPersistentMenu : setupPersistentMenu
+    setupPersistentMenu : setupPersistentMenu,
+    userLastFiveMessages
 }
 
