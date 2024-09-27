@@ -275,9 +275,8 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
         sendTypingIndicator(sender_psid, true);
 
         // Send user message to model and get model response
-        let message_history = userLastFiveMessages[sender_psid];
-        console.log("message_history: ", message_history);
-        let model_response = await sendAPItoRAGModel(user_message, message_history, database);
+        console.log("message_history: ", userLastFiveMessages[sender_psid]);
+        let model_response = await sendAPItoRAGModel(user_message, userLastFiveMessages[sender_psid], database);
 
         let response2 = { "text": model_response };
 
@@ -300,7 +299,7 @@ let sendAPItoRAGModel = async (user_message, message_history, database) => {
     const url = "https://wse-rag-v2.onrender.com/api/query"; // FastAPI URL
 
     let chat_hist_str = '';
-    if (message_history.length === 0) {
+    if (!message_history) {
         console.log("Chat history is empty.")
     }
     else{
