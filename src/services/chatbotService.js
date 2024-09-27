@@ -300,15 +300,19 @@ let sendAPItoRAGModel = async (user_message, message_history, database) => {
 
     if (message_history.length === 0) {
         console.log("Chat history is empty.");
-        message_history = [];
+        let chat_hist_str = [];
+    }
+    else{
+        let chat_hist_str = message_history.map(msg => `- ${msg}`).join('\n');
     }
 
+    let prompt = `Các câu hỏi trước của người dùng:\n${chat_hist_str}\n\nCâu hỏi hiện tại: ${user_message}`;
+
     const data = {
-        prompt: user_message,
-        chat_history: message_history,
+        prompt: prompt,
         database: database
     };
-    console.log('message_history:', message_history);
+    console.log('prompt:', data.prompt);
 
     try {
         // Make the POST request
