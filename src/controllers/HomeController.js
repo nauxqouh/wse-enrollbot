@@ -35,8 +35,8 @@ let postWebhook = (req, res) => {
                 // handleMessage(sender_psid, webhook_event.message);
                 
                 let user_message = webhook_event.message.text;
-                chatbotService.addMessage(sender_psid, user_message);
                 chatbotService.handleUserQuestion(sender_psid, user_message, database);
+                chatbotService.addMessage(sender_psid, user_message);
             } else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
             }
