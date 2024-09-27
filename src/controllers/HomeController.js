@@ -141,7 +141,7 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'RESTART_BOT':
             userLastFiveMessages[sender_psid] = [];
-            await chatbotService.handleGetStarted(sender_psid);
+            await chatbotService.handleRestartBot(sender_psid);
             break;
         case 'GET_STARTED':
             await chatbotService.handleGetStarted(sender_psid);

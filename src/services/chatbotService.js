@@ -107,6 +107,32 @@ let handleGetStarted = (sender_psid) => {
     })
 }
 
+let handleRestartBot = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            let username = await getUserName(sender_psid);
+            let response1 = { "text": `Chào mừng ${username} đến với wse enroll-bot - Hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM.`}
+            let response5 = { "text": `Để bắt đầu, vui lòng chọn trường bạn quan tâm từ danh sách dưới đây.\nChúc bạn có một trải nghiệm tìm kiếm thông tin thuận lợi!`}
+            let response6 = getUniversitySelectTemplate();
+
+            // Create delay
+            const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+            sendTypingIndicator(sender_psid, true);
+            await callSendAPI(sender_psid, response1);
+            await delay(4000);
+            await callSendAPI(sender_psid, response5);
+            await delay(3000);
+            await callSendAPI(sender_psid, response6);
+            sendTypingIndicator(sender_psid, false);
+
+            resolve("done");
+        }catch(e){
+            reject(e);
+        }
+    })
+}
+
 let getStartedTemplate = () => {
     let response = {
         "attachment": {
@@ -276,6 +302,7 @@ let sendAPItoRAGModel = async (user_message, message_history, database) => {
         chat_history: message_history,
         database: database
     };
+    console.log(message_history);
 
     try {
         // Make the POST request
@@ -331,6 +358,7 @@ function addMessage(sender_psid, new_message) {
 
 module.exports = {
     handleGetStarted: handleGetStarted,
+    handleRestartBot: handleRestartBot,
     handleSendUniversitySelect: handleSendUniversitySelect,
     handleUserQuestion: handleUserQuestion,
     sendTypingIndicator: sendTypingIndicator,
