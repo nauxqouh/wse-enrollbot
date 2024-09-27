@@ -276,6 +276,7 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
 
         // Send user message to model and get model response
         let message_history = userLastFiveMessages[sender_psid];
+        console.log("message_history: ", message_history);
         let model_response = await sendAPItoRAGModel(user_message, message_history, database);
 
         let response2 = { "text": model_response };
@@ -298,12 +299,12 @@ let sendAPItoRAGModel = async (user_message, message_history, database) => {
     // Define the API endpoint and the request payload
     const url = "https://wse-rag-v2.onrender.com/api/query"; // FastAPI URL
 
+    let chat_hist_str = '';
     if (message_history.length === 0) {
-        console.log("Chat history is empty.");
-        let chat_hist_str = [];
+        console.log("Chat history is empty.")
     }
     else{
-        let chat_hist_str = message_history.map(msg => `- ${msg}`).join('\n');
+        chat_hist_str = message_history.map(msg => `- ${msg}`).join('\n');
     }
 
     let prompt = `Các câu hỏi trước của người dùng:\n${chat_hist_str}\n\nCâu hỏi hiện tại: ${user_message}`;
