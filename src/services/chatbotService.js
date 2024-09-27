@@ -265,7 +265,7 @@ let getUniversitySelectTemplate = () => {
 }
 
 
-let handleUserQuestion = async (sender_psid, user_message, message_history, database) => {
+let handleUserQuestion = async (sender_psid, user_message, database) => {
     try {
         // let response1 = { "text": "Tôi đã nhận được tin nhắn. Hãy đợi tôi một chút." }
         // // Send text message
@@ -275,6 +275,7 @@ let handleUserQuestion = async (sender_psid, user_message, message_history, data
         sendTypingIndicator(sender_psid, true);
 
         // Send user message to model and get model response
+        let message_history = userLastFiveMessages[sender_psid];
         let model_response = await sendAPItoRAGModel(user_message, message_history, database);
 
         let response2 = { "text": model_response };
@@ -295,7 +296,7 @@ let handleUserQuestion = async (sender_psid, user_message, message_history, data
 // Send API to RAG Model
 let sendAPItoRAGModel = async (user_message, message_history, database) => {
     // Define the API endpoint and the request payload
-    const url = "https://wse-rag-v2.onrender.com/api/query/"; // FastAPI URL
+    const url = "https://wse-rag-v2.onrender.com/api/query"; // FastAPI URL
 
     if (message_history.length === 0) {
         console.log("Chat history is empty.");
