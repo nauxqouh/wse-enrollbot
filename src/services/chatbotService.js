@@ -297,12 +297,17 @@ let sendAPItoRAGModel = async (user_message, message_history, database) => {
     // Define the API endpoint and the request payload
     const url = "https://wse-rag-v2.onrender.com/api/query/"; // FastAPI URL
 
+    if (message_history.length === 0) {
+        console.log("Chat history is empty.");
+        message_history = [];
+    }
+
     const data = {
         prompt: user_message,
         chat_history: message_history,
         database: database
     };
-    console.log(message_history);
+    console.log('message_history:', message_history);
 
     try {
         // Make the POST request
