@@ -66,7 +66,7 @@ let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
             let username = await getUserName(sender_psid);
-            let response1 = { "text": `Chào mừng ${username} đến với wse enroll-bot - Hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM.`}
+            let response1 = { "text": `Chào mừng ${username} đến với WSE College Assistant - Hệ thống tư vấn tuyển sinh tự động ĐHQG-HCM.`}
             let response2 = { "text": `Chúng tôi rất vui được đồng hành cùng bạn trong hành trình tìm hiểu và chọn lựa trường học phù hợp. Hệ thống của chúng tôi cung cấp thông tin chi tiết về từng trường thuộc ĐHQG-HCM, giúp bạn dễ dàng khám phá các yêu cầu tuyển sinh, chương trình đào tạo và các cơ hội học tập.`}
             let response3 = { "text": `Ngoài việc tư vấn về các trường, chúng tôi cũng sẵn sàng hỗ trợ bạn với các thông tin hữu ích khác như kí túc xá, xe bus và các tiện ích khác để bạn có thể chuẩn bị tốt nhất cho cuộc sống sinh viên của mình.`}
             let response4 = { "text": `Trong quá trình nếu hệ thống gặp sự cố, hãy thử bấm khởi động lại ở góc dưới bên phải cuộc hội thoại. Hoặc bạn có thể thử lại sau và đừng ngần ngại liên hệ cho chúng tôi.`}
