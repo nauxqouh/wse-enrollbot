@@ -260,8 +260,8 @@ let setupPersistentMenu = async (req, res) => {
                         },
                         {
                             "type": "web_url",
-                            "title": "ChatBot Web",
-                            "url": "https://enroll-chatbot-test.streamlit.app/",
+                            "title": "WSE-Bot Website",
+                            "url": "https://rag-enrollbot.onrender.com/WSEChatBot",
                             "webview_height_ratio": "full"
                         },
                         {

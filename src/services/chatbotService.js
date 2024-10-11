@@ -287,7 +287,7 @@ let handleUserQuestion = async (sender_psid, user_message, database) => {
         sendTypingIndicator(sender_psid, false);
 
     } catch (e) {
-        let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố." };
+        let response = { "text": "Xin lỗi, hiện tại hệ thống đang gặp sự cố. Thực hiện báo lỗi ở link: https://rag-enrollbot.onrender.com/BaoLoi" };
         await callSendAPI(sender_psid, response);
         console.error("Error handling user question:", e); // Log error for debugging
     }
