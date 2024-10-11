@@ -265,8 +265,14 @@ let setupPersistentMenu = async (req, res) => {
                             "webview_height_ratio": "full"
                         },
                         {
+                            "type": "web_url",
+                            "title": "Error report",
+                            "url": "https://rag-enrollbot.onrender.com/BaoLoi",
+                            "webview_height_ratio": "full"
+                        },
+                        {
                             "type": "postback",
-                            "title": "Restart",
+                            "title": "Restart Bot",
                             "payload": "RESTART_BOT"
                         }
                     ]
